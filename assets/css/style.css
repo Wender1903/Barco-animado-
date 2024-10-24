@@ -1,0 +1,497 @@
+@import url('https://fontes.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600;700&family=Jost:wght@500&display=swap');
+
+:root {
+    --altura-do-cabecalho: 3.5rem;
+  
+            /* Cores */
+   
+    --cor-principal: hsl(40, 24%, 64%);
+    --cor-branca: hsl(40, 31%, 89%);
+    --cor-preto: hsl(40, 14%, 14%);
+    --cor-do-corpo: hsl(40, 33%, 86%);
+  
+            /* fonte and typography */
+            /*.5rem = 8px | 1rem = 16px ...*/
+    --fonte-principal-do-corpo: "Jost", sans-serif;
+    --fonte-secundaria: "Cormorant Garamond", serif;
+    --fonte-de-maior-tamanho: 3.5rem;
+    --fonte-de-tamanho-maior: 2.75rem;
+    --grande-fonte-tamanho: 1.25rem;
+    --fonte-de-tamanho-normal: .938rem;
+  
+            /* font weight */
+    --fonte-medium: 500;
+    --fonte-semi-bold: 600;
+    --fonte-bold: 700;
+  
+            /* z index */
+    --z-tooltip: 10;
+    --z-fixo: 100;
+  }
+
+            /* Tipografia da página  para tamanhos de telas maiores */
+
+  @media screen and (min-width: 1150px) {
+
+    :root {
+        --fonte-de-maior-tamanho: 6rem;
+        --fonte-de-tamanho-maior: 4.5rem;
+        --grande-fonte-tamanho: 2rem;
+        --fonte-de-tamanho-normal: 1rem;
+    }
+  }
+
+             /*  Designs Base */
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: var(--fonte-principal-do-corpo);
+    font-size: var(--fonte-de-tamanho-normal);
+    background-color: var(--cor-do-corpo);
+    color: var(--cor-preto);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+            /*  Classes de CSS reutilizáveis */
+        
+.conteudo {
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+}   
+
+.principal {
+    overflow: hidden;
+}
+
+            /* Cabeçalho e navegação */
+.cabecalho {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: var(--z-fixo);
+    transition: background-color .4s, box-shadow .4s;
+}
+
+.navegacao {
+    position: relative;
+    height: var(--altura-do-cabecalho);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.navegacao__logo {
+    display: inline-flex;
+    align-items: center;
+    column-gap: .5rem;
+    font-family: var(--fonte-secundaria);
+    color: var(--cor-preto);
+}
+
+.navegacao__logo i {
+    font-size: 1.5rem;
+}
+
+.navegacao__logo span {
+    font-weight: var(--fonte-bold);
+}
+
+.visualizar__menu, 
+.fechar__navegacao {
+    display: flex;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Navegacação para Celulares */
+@media screen and (max-width: 1150px) {
+    .navegacao__menu {
+        position: fixed;
+        top: -120%;
+        left: 0;
+        background-color: var(--cor-do-corpo);
+        box-shadow: 0 4px 24px hsla(40, 24%, 4%, .1);
+        width: 100%;
+        padding-block: 5rem 4.5rem;
+        transition: top .4s;
+    }
+    
+}
+.navegacao__lista {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+}
+
+.navegacao__link {
+    color: var(--cor-preto);
+}
+
+.fechar__navegacao {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.mostrar-menu {
+    top: 0;
+}
+
+/* Adicionar sombra ao cabeçalho */
+.sombra-cabecalho {
+    background-color: var(--cor-do-corpo);
+    box-shadow: 0 2px 16px hsla(40, 24%, 4%, .1);
+}
+
+/* Home */
+
+.home {
+    position: relative;
+    
+}
+
+.home__conteudo {
+    padding-top: 9.5rem;
+    height: 100vh;
+}
+
+.home__data {
+    position: relative;
+    z-index: var(--z-tooltip);
+}
+
+.home__subtitulo {
+    font-size: var(--grande-fonte-tamanho);
+    font-family: var(--fonte-principal-do-corpo);
+}
+
+.home__titulo {
+    font-size: var(--fonte-de-tamanho-maior);
+    line-height: 100%;
+    margin-bottom: 1rem;
+}
+
+.home__titulo span{
+    font-size: var(--fonte-de-tamanho-maior);
+}
+
+.home__botao {
+    position: relative;
+    display: inline-flex;
+    background-color: var(--cor-do-corpo);
+    border: 3px solid var(--cor-preto);
+    padding: .75rem 2rem;
+    border-radius: 4rem;
+    color: var(--cor-preto);
+}
+
+.home__botao::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-do-corpo);
+    border: 3px solid var(--cor-preto);
+    border-radius: 4rem;
+    left: 0;
+    bottom: -8px;
+    justify-self: center;
+    z-index: -1;
+    transition: transform .4s;
+}
+
+.home__botao:hover::after {
+    transform: translate(2px, 2px);
+
+}
+
+.home__nuvem-1,
+.home__nuvem-2 {
+    position: absolute;
+    width: 150px;
+}
+
+.home__nuvem-1 {
+    top: 6rem;
+    right: 1rem;
+    animation: nuvem-1 8s linear infinite;
+}
+
+.home__nuvem-2 {
+    top: 25rem;
+    left: .5rem;
+    animation: nuvem-2 8s linear infinite;
+}
+
+.home__imagens {
+    overflow: hidden;
+}
+
+.home__imagens div {
+    max-width: initial;
+    width: 100vw;
+    height: 270px;
+    background-size: 1000px 100%;
+    position: absolute;
+    left: 0;
+}
+
+.home__ondas-1 {
+    bottom: -1.5rem;
+    animation: ondas-1 4s linear infinite;
+
+}
+
+.home__ondas-2 {
+    bottom: -1rem;
+    animation: ondas-2 4s linear infinite;
+
+}
+
+.home__ondas-3 {
+    bottom: 3rem;
+    animation: ondas-3 4s linear infinite;
+
+}
+
+.home__barco {
+    width: 300px;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    transform-origin: center center;
+    animation: barco 2s linear infinite;
+}
+
+
+/* Animação das nuvens */
+
+@keyframes nuvem-1 {
+    0% {
+        margin-right: -1000px;
+    }
+    100% {
+        margin-right: 100%;
+    }
+}
+
+@keyframes nuvem-2 {
+    0% {
+        margin-left: 100%;
+    }
+    100% {
+       margin-left: -1000px;
+    }
+}
+
+
+/* Animação das Ondas */
+@keyframes ondas-1 {
+    0% {
+        background-position-x: 1000px;
+    }
+    100% {
+        background-position-x: 0;
+    }
+}
+
+@keyframes ondas-2 {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+/* Animação do barco */
+@keyframes barco {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+    25% {
+        transform: translateY(0) rotate(-8deg);
+    }
+    40% {
+        transform: translateY(4px) rotate(-8deg);
+    }
+    85% {
+        transform: translateY(1px) rotate(8deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+
+}
+
+            /* Breakpoints */
+/* Para aparelhos pequenos */
+@media screen and (max-width:300px) {
+    .conteudo {
+        margin-inline: 1rem;
+    }
+
+    .home__titulo {
+        font-size: 3rem;
+    }
+
+    .home__titulo span {
+        font-size:  2.5rem;
+    }
+}
+
+@media screen and (max-width:350px) and (max-height:680px) {
+    .home__conteudo {
+        height: 750px;
+    }
+
+    .home__imagens div {
+        width: 100%;
+    }
+}
+
+/*  Para aparelhos medios */
+@media screen and (min-width:576px) {
+    .home__imagens {
+        width: 100%;
+    }
+
+    .home__barco {
+        width: 400px;
+    }
+}
+
+/* Para Dispositivos maiores  */
+
+@media screen and (min-width:1150px){
+    .conteudo {
+        margin-inline: auto;
+        max-width: 75%;
+
+    }
+
+    .navegacao {
+        height: calc(var(--altura-do-cabecalho) + 2rem);
+    }
+
+    .visualizar__menu, 
+    .fechar__navegacao {
+        display: none;
+    }
+
+    .navegacao__lista {
+        flex-direction: row;
+        column-gap: 4.5rem;
+    }
+
+    .home__conteudo {
+        height: 860px;
+        padding: 5rem 0;
+    }
+
+    .home__titulo {
+        margin-bottom: 3rem;
+    }
+
+    .home__botao,
+    .home__botao::after {
+        border-width: 4px;
+    }
+
+    .home__botao::after {
+        bottom: -12px;
+    }
+
+    .home__nuvem-1,
+    .home__nuvem-2 {
+        width: 250px;
+    }
+
+    .home__nuvem-2 {
+        top: 20rem;
+    }
+
+    .home__imagens div {
+        height: 300px;
+        background-size: 100vw 100%;
+    }
+
+    .home__barco {
+        width: 600px;
+        left: 30rem;
+    }
+
+    .home__nuvem-1 {
+        bottom: -2.5rem;
+    }
+
+    .home__ondas-2 {
+        bottom: -2rem;
+    }
+
+    .home__ondas-3 {
+        bottom: 5rem;
+    }
+
+/* Animaão para computadores */
+    @keyframes ondas-1 {
+        0% {
+            background-position-x: 100vw;
+        }
+        100% {
+            background-position-x: 0;
+        }
+    }
+
+    @keyframes ondas-2 {
+        0% {
+            background-position-x: 0;
+        }
+        100% {
+            background-position-x: 100vw;
+        }
+    }
+}
+
+@media screen and (min-width:1150px) and (min-height:100px) {
+    .home__conteudo {
+        display: grid;
+        height: 100vh;
+    }
+    .home__data {
+        align-self: center;
+
+    }
+
+    .home__imagens div {
+        height: 375px;
+    }
+
+    .home__barco {
+        width: 640px;
+    }
+}
